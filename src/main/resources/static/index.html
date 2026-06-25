@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="topbar">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                </svg>
+                <h1>LibraSyn</h1>
+            </div>
+            <div class="author-tag">Library Manager</div>
+        </header>
+
+        <main class="content">
+            <!-- Add Book Section -->
+            <section class="glass-panel add-book-section">
+                <h2>Add New Book</h2>
+                <form id="addBookForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" required placeholder="e.g. The Great Gatsby">
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Author</label>
+                            <input type="text" id="author" name="author" required placeholder="e.g. F. Scott Fitzgerald">
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price ($)</label>
+                            <input type="number" id="price" name="price" step="0.01" min="1" required placeholder="10.99">
+                        </div>
+                        <div class="form-group">
+                            <label for="year">Publication Year</label>
+                            <input type="number" id="year" name="year" required placeholder="1925">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary" id="submitBtn">
+                        <span>Save Book</span>
+                        <div class="spinner hidden" id="submitSpinner"></div>
+                    </button>
+                </form>
+                <div id="formMessage" class="message hidden"></div>
+            </section>
+
+            <!-- Book List Section -->
+            <section class="glass-panel library-section">
+                <div class="section-header">
+                    <h2>Library Inventory</h2>
+                    <div class="controls">
+                        <button class="btn-icon" id="refreshBtn" title="Refresh list">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.92-10.27l-3.27-3.27"></path></svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Year</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookTableBody">
+                            <!-- Rows generated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Simple pagination controls -->
+                <div class="pagination">
+                    <button id="prevPage" class="btn-secondary" disabled>Previous</button>
+                    <span id="pageInfo">Page 1</span>
+                    <button id="nextPage" class="btn-secondary">Next</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay hidden" id="editModal">
+        <div class="modal glass-panel">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <h2>Edit Book</h2>
+            <form id="editBookForm">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label for="editTitle">Title</label>
+                    <input type="text" id="editTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="editAuthor">Author</label>
+                    <input type="text" id="editAuthor" required>
+                </div>
+                <div class="form-group">
+                    <label for="editPrice">Price ($)</label>
+                    <input type="number" id="editPrice" step="0.01" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="editYear">Publication Year</label>
+                    <input type="number" id="editYear" required>
+                </div>
+                <button type="submit" class="btn-primary">Update Book</button>
+            </form>
+            <div id="editMessage" class="message hidden"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
